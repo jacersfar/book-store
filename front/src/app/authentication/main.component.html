@@ -1,0 +1,55 @@
+<div class="container">
+  <form class="auth-card" *ngIf="!displayRegisterForm" #authForm="ngForm">
+    <h3 class="title">Login</h3>
+    <mat-form-field>
+      <mat-label><mat-icon>email</mat-icon></mat-label>
+      <input matInput type="email" name="username" [(ngModel)]="email" required [pattern]="emailRegex" #username="ngModel">
+      <mat-error *ngIf="username.errors?.required">Email is required</mat-error>
+      <mat-error *ngIf="username.errors?.pattern">Email must be valid</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label><mat-icon>password</mat-icon></mat-label>
+      <input matInput type="password" name="authPassword" [(ngModel)]="password" required minlength="8" maxlength="20" #authPassword="ngModel">
+      <mat-error *ngIf="authPassword.errors?.minlength || authPassword.errors?.maxlength">Password must be between 8 and 20 characters long</mat-error>
+      <mat-error *ngIf="authPassword.errors?.required">Password is required</mat-error>
+    </mat-form-field>
+    <div claas="auth-error" *ngIf="error !== null"><span class="error">Authentication failed. please verify your email and password</span> </div>
+    <div class="auth-nav">
+      <button mat-button color="primary" class="link" (click)="displayRegisterForm = !displayRegisterForm; reset();" >Not a member ?</button>
+    </div>
+    <div class="but-container">
+      <button mat-raised-button color="primary" [disabled]="authForm.invalid" (click)="login()">Login</button>
+    </div>
+  </form>
+  <form class="register-card" *ngIf="displayRegisterForm" #registerForm="ngForm">
+    <h3 class="title">Register</h3>
+    <mat-form-field>
+      <mat-label><mat-icon>email</mat-icon></mat-label>
+      <input matInput type="email" name="email" #regEmail="ngModel" [(ngModel)]="email" required [pattern]="emailRegex">
+      <mat-error *ngIf="regEmail.errors?.required">Email is required</mat-error>
+      <mat-error *ngIf="regEmail.errors?.pattern">Email must be valid</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label><mat-icon>password</mat-icon></mat-label>
+      <input matInput type="password" name="reg-password" #registerPassword="ngModel" [(ngModel)]="password" required minlength="8" maxlength="20">
+      <mat-error *ngIf="registerPassword.errors?.minlength || registerPassword.errors?.maxlength">Password must be between 8 and 20 characters long</mat-error>
+      <mat-error *ngIf="registerPassword.errors?.required">Password is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label><mat-icon>text_rotation_none</mat-icon></mat-label>
+      <input matInput type="text" name="firstName" #regfirstName="ngModel" [(ngModel)]="firstName" required>
+      <mat-error *ngIf="regfirstName.errors?.required">First name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label><mat-icon>text_rotation_none</mat-icon></mat-label>
+      <input matInput type="text" name="lastName" #reglastName="ngModel" [(ngModel)]="lastName" required>
+      <mat-error *ngIf="reglastName.errors?.required">Last name is required</mat-error>
+    </mat-form-field>
+    <div class="auth-nav">
+      <button mat-button color="primary" class="link" (click)="displayRegisterForm = !displayRegisterForm; reset();">Already a member ?</button>
+    </div>
+    <div class="but-container">
+      <button mat-raised-button color="primary">Register</button>
+    </div>
+  </form>
+</div>

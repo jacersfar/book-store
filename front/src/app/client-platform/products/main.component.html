@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="container-md">
+    <div class="toolbar-sx">
+      <mat-form-field>
+        <mat-label><mat-icon matSuffix>search</mat-icon></mat-label>
+        <mat-placeholder>Search</mat-placeholder>
+        <input matInput type="text">
+      </mat-form-field>
+    </div>
+    <div class="container-sm">
+      <div class="card-container"  *ngFor="let book of booksObs$ | async">
+        <app-book-card
+          [book]="book"
+          (addToBasket)="addToBasket($event)"
+        >
+        </app-book-card>
+      </div>
+    </div>
+    <div class="footer">
+      <mat-paginator #booksPaginator></mat-paginator>
+    </div>
+  </div>
+</div>

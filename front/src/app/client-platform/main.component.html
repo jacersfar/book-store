@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="toolbar">
+  <div class="menu-items-container">
+    <a mat-button color="transparent" routerLink="products">Available Books</a>
+    <div class="info-container">
+      <a mat-icon-button  routerLink="cart">
+        <mat-icon matBadge="{{user?.cart?.cartItems?.length}}" matBadgeColor="accent">shopping_cart</mat-icon>
+      </a>
+      <button mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
